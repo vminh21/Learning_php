@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link ref="stylesheet.css" href="style.css">
+    <title>Buoi 4</title>
+   <!-- /* <script lang="javascrip">
+        alert("Hello World")
+    </script> / -->
+    <script src="hehe.js"></script>
+</head>
+<body>
+    <button id="btnTest" onclick="alert('Hello')">Xin chao</button>
+    <button id="btnTest" >fake</button>
+    
+    <script>
+        document.getElementById("btnTest").onclick= function(){
+            alert("Su kien da dc kick hoat")
+        }
+    </script>
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Nhap ten">
+        <button type="submit">Gui</button>
+    </form>
+    <script>
+        document.getElementById("myForm")
+        .addEventListener("submit", function(event){
+            let name = document.getElementById("name").value;
+            if(name === ""){
+                alert("Vui long nhap lai ten!");
+                event.preventDefault();// Ngan chan gui form
+            }else{
+                alert("Xin chao" +name);
+            }
+        })
+    </script>
+</body>
+</html>

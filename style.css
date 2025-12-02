@@ -1,0 +1,80 @@
+p{
+    color: brown;
+    text-align: center;
+}
+h1{
+    color: blueviolet;
+    text-align: center;
+    font-size: 18px;
+}
+ul{
+    color: cornflowerblue;
+    font-size: 20px;
+}
+.head{
+    text-align: center;
+    font-size: 20px;
+}
+.foot{
+    text-align: left;
+    font-size: 16px;
+}
+tr,td{
+    border: 2px solid black;
+    border-radius: 5px;
+}
+table{
+    border-radius: 5px;
+}
+/*
+   FORM
+ */
+input,
+textarea,
+select {
+  width: center;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font: inherit;
+  margin-bottom: 10px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #0077ff;
+  box-shadow: 0 0 0 1px rgba(0, 119, 255, 0.2);
+}
+
+form {
+  width: 400px;
+  margin: 0 auto;        /* căn giữa ngang */
+}
+
+/*
+   FOOTER
+*/
+footer {
+  text-align: center;
+  padding: 16px 0 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+a{
+    text-decoration: none;
+}
+#nhom1{
+    color: red;
+}
+#nhom2{
+    color: blue;
+}
+.nhom3{
+    color: green;
+}
+
+button{
+    background-color: #0077ff;
+}
