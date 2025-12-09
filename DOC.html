@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng hợp 4 Ví dụ JavaScript DOM và Validation</title>
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background-color: #f4f4f4;
+        }
+        
+        /* CSS 1: VÍ DỤ LOGIN/VALIDATION */
+        .login-form { 
+            max-width: 350px; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-form input { 
+            width: 100%; 
+            padding: 10px; 
+            margin: 8px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            box-sizing: border-box;
+        }
+        .login-form button { 
+            background-color: #007bff; 
+            color: white; 
+            padding: 10px 15px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 15px; 
+        }
+        #message { 
+            margin-top: 15px; 
+            padding: 10px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            text-align: center; 
+        }
+        .error { color: red; background-color: #ffe8e8; }
+        .success { color: green; background-color: #e8ffe8; }
+
+        /* CSS 2: VÍ DỤ DOM & STYLE */
+        #text {
+            color: blue;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        .highlight { 
+            color: red; 
+            font-weight: bold; 
+        }
+        
+        /* CSS 3: VÍ DỤ THAY THẾ PHẦN TỬ */
+        #img-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #image {
+            width: 200px;
+            height: auto;
+            border: 2px solid #333;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        /* Style cho đoạn văn bản thay thế */
+        .replaced-text {
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            margin: 30px 0;
+            border: 0;
+            border-top: 2px dashed #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tổng Hợp Các Bài Học JavaScript DOM</h1>
+
+    <h2>1. Lấy và Gán Style</h2>
+    <p id="text">Đây là đoạn văn bản có sẵn CSS.</p>
+    <button onclick="getStyle()">Lấy style</button>
+    <button onclick="setStyle()"> Gán style</button>
+    <p id="result">Kết quả Style:</p>
+    
+    <hr>
+    
+    <h2>2. Thao tác DOM cơ bản (Thay đổi nội dung, Class, Thêm phần tử)</h2>
+    <h1 id="title">Xin chào DOM!</h1>
+    <p class="description">Đây là đoạn văn có class.</p>
+    <p class="description">Đây là đoạn văn thứ hai có cùng class.</p>
+    <button onclick="changeText()">🔄 Thay đổi nội dung & Class</button>
+    <ul id="list">
+        <li>Phần tử 1</li>
+        <li>Phần tử 2</li>
+        <li>Phần tử 3</li>
+    </ul>
+
+    <hr>
+    
+    <h2>3. Thay thế Phần tử (Replace Child)</h2>
+    <div id="img-container">
+        <img id="image" src="data:image/jpeg;base64,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" alt="Hình ảnh ban đầu">
+        
+        <br>
+        <button onclick="replaceElement()">Thay thế hình ảnh</button>
+    </div>
+    
+    <hr>
+
+    <h2>4. Chương trình Đăng nhập và Validate (Kiểm tra rỗng)</h2>
+    <div class="login-form">
+        <label for="username">Tên người dùng:</label>
+        <input type="text" id="username" placeholder="Nhập tên người dùng">
+
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" placeholder="Nhập mật khẩu">
+
+        <button onclick="validateLogin()">Đăng Nhập</button>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        
+        // --- CHỨC NĂNG 1: LẤY VÀ GÁN STYLE ---
+        function getStyle() {
+            const textElement = document.getElementById('text');
+            const style = window.getComputedStyle(textElement);
+            const color = style.color;
+            const size = style.fontSize;
+            
+            document.getElementById('result').innerHTML = `Kết quả Style: Màu: <b>${color}</b>, Cỡ chữ: <b>${size}</b>`;
+        }
+
+        function setStyle() {
+            const textElement = document.getElementById('text');
+            textElement.style.color = 'green';
+            textElement.style.backgroundColor = '#f0fff0';
+            textElement.style.border = '2px dashed green';
+            document.getElementById('result').textContent = "Đã gán style mới thành công!";
+        }
+
+        // --- CHỨC NĂNG 2: THAO TÁC DOM CƠ BẢN ---
+        function changeText() {
+            document.getElementById('title').textContent = "Nội dung đã được thay đổi!";
+            
+            const paragraph = document.querySelector('.description');
+            paragraph.className = 'highlight'; 
+            
+            const list = document.getElementById('list');
+            const newLi = document.createElement('li');
+            newLi.textContent = "Phần tử mới được thêm!";
+            list.appendChild(newLi);
+        }
+
+        function replaceElement() {
+            // 1. Xác định phần tử cha (container) và phần tử con cần thay thế (image)
+            const container = document.getElementById('img-container');
+            const oldImage = document.getElementById('image');
+            
+            // Kiểm tra xem ảnh còn tồn tại không (để tránh lỗi nếu bấm nút lần 2)
+            if (oldImage) {
+                // 2. Tạo phần tử mới (thẻ p)
+                const newPara = document.createElement('p');
+                newPara.textContent = "Hình ảnh đã được thay thế bằng đoạn văn!";
+                
+                // Thêm class hoặc style để chữ màu đỏ như yêu cầu
+                newPara.className = "replaced-text"; 
+                // Hoặc set trực tiếp: newPara.style.color = "red";
+
+                // 3. Thực hiện thay thế: cha.replaceChild(mới, cũ)
+                container.replaceChild(newPara, oldImage);
+            } else {
+                alert("Hình ảnh đã được thay thế rồi!");
+            }
+        }
+
+        // --- CHỨC NĂNG 4: VALIDATION LOGIN ---
+        function validateLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const messageDiv = document.getElementById('message');
+            
+            messageDiv.textContent = "";
+            messageDiv.className = "";
+            
+            if (username === "" || password === "") {
+                messageDiv.textContent = " Lỗi: Vui lòng nhập đầy đủ Tên người dùng và Mật khẩu!";
+                messageDiv.classList.add('error');
+            } else {
+                messageDiv.textContent = "Validate thành công! Thông tin hợp lệ.";
+                messageDiv.classList.add('success');
+            }
+        }
+        
+    </script>
+</body>
+</html>

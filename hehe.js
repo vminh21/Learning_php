@@ -1,4 +1,4 @@
-alter("hello world");
+alert("hello world");
 var x = "Lap trinh web";
 x= 10;
 
@@ -138,13 +138,13 @@ console.log("So trang trong lich su: " + history.length);
         //DOI TUONG STRING TRONG JAVASCRIPT
 
 //1. Khai báo chuỗi
-let.text = " JavaScript là ngôn ngữ lập trình tuyệt vời! ";
+let text = " JavaScript là ngôn ngữ lập trình tuyệt vời! ";
 
 //2. Lay độ dài chuỗi
 console.log("Độ dài chuỗi: ", text.length);
 
 //3. Lấy ký tự trong chuỗi
-console.log("Ky tự tại vị trí 0: ", text.charAt(0));
+console.log("Ky tự tại vị trí 1: ", text.charAt(1));
 console.log("Ma ASSII của ký tự tại vị trí 0: ", text.charCodeAt(0));
 console.log("Dung cu phap []: ", text[0]);
 
@@ -341,7 +341,7 @@ console.log("Mang sau khi reverse: ", fruits);
 
 //12. forEach() - lap qua tung phan tu trong mang
 console.log("Duyet mang bang forEach:");
-fruits.forEach(fruits => console.log(fruit));
+fruits.forEach(fruits => console.log(fruits));
 
 //13. map() - tao mang moi tu mang cu
 let uppercaseFruits = fruits.map(fruit => fruit.toUpperCase());

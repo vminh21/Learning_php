@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="card form-card">
+            <h2>Đăng Nhập</h2>
+            <form action="#" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+                </div>
+
+                <input type="submit" class="btn-primary" id="btndangnhap" value="Đăng nhập">
+            </form>
+        </div>
+
+        <div class="card form-card">
+            <h2>Đăng Ký Tài Khoản</h2>
+            <form class="register-form" id="Sign_upForm">
+                <div class="row">
+                    <div class="col">
+                        <label for="firstname">Tên</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="Tên">
+                    </div>
+                    <div class="col">
+                        <label for="lastname">Họ đệm</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="Họ đệm">
+                    </div>
+                </div>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Địa chỉ Email">
+
+                <label for="phonenumber">Số điện thoại</label>
+                <input type="text" id="phonenumber" name="phonenumber" placeholder="SĐT">
+
+                <label for="city">Thành phố</label>
+                <select id="city">
+                    <option value="" disabled selected>Chọn thành phố</option>
+                    <option value="Hanoi">Hà Nội</option>
+                    <option value="Haiduong">Hải Dương</option>
+                    <option value="Haiphong">Hải Phòng</option>
+                    <option value="Hagiang">Hà Giang</option>
+                    <option value="Quangninh">Quảng Ninh</option>
+                    <option value="Hungyen">Hưng Yên</option>
+                    <option value="Vinhphuc">Vĩnh Phúc</option>
+                    <option value="Phutho">Phú Thọ</option>
+                    <option value="Nhatrang">Nha Trang</option>
+                </select>
+
+                <label for="node">Ghi chú</label>
+                <textarea id="node" name="node" rows="4" placeholder="Nhập ghi chú của bạn..."></textarea>
+
+                <input type="submit" class="btn-success" value="Đăng ký">
+            </form>
+        </div>
+
+    </div>
+    <script>
+        document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            if(username === "admin" && password === "123456") {
+                alert("Đăng nhập thành công!");
+                console.log("User đã đăng nhập với tên:", username);
+                console.log("Mật khẩu:", password);
+                username = "";
+                password = "";
+            } else if(username === "" || password === "") {
+                alert("Vui long nhap đầy đủ thông tin!");
+            }else {
+                alert("Đăng nhập thất bại! Vui lòng kiểm tra lại tên đăng nhập và mật khẩu.");
+            }
+            event.preventDefault();
+        });
+    </script>
+    <script>
+       document.getElementById("Sign_upForm")
+    .addEventListener("submit", function(event) { 
+        
+        // Ngăn chặn form tải lại trang
+        event.preventDefault();
+
+        let firstname = document.getElementById("firstname").value;
+        let lastname = document.getElementById("lastname").value;
+        let email = document.getElementById("email").value;
+        let phonenumber = document.getElementById("phonenumber").value;
+        let city = document.getElementById("city").value; // Lưu ý: thẻ select phải có id="city"
+        let node = document.getElementById("node").value;
+
+        if(firstname === "" || lastname === "" || email === "" || phonenumber === "" || city === "") {
+            alert("Vui lòng điền đầy đủ thông tin đăng ký!");
+        } else {
+            alert("Đăng ký thành công! Xin chào " + firstname + " " + lastname);
+            console.log("Thông tin đăng ký:");
+            console.log("Tên:", firstname);
+            console.log("Họ đệm:", lastname);
+            console.log("Email:", email);
+            console.log("SĐT:", phonenumber);
+            console.log("Thành phố:", city);
+            console.log("Ghi chú:", node);
+
+            // 2. Cách xóa dữ liệu trên Form đúng:
+            // Cách 1: Reset toàn bộ form nhanh nhất
+            document.getElementById("Sign_upForm").reset();
+        }
+    });
+    </script>
+</body>
+</html>

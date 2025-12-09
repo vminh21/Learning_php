@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Cứu Học Bổng KKHT</title>
+    <style>
+        /* Cấu hình chung */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 600px; /* Giới hạn chiều rộng giống khung điện thoại/web */
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Phần Tiêu đề */
+        h1 {
+            color: #1a237e; /* Màu xanh đậm giống ảnh */
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 0;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .decision-text {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        /* Phần Form nhập liệu */
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 150px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #1565c0;
+        }
+
+        .btn-search {
+            display: block;
+            margin: 15px auto;
+            background-color: #1565c0; /* Màu xanh nút */
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-search:hover {
+            background-color: #0d47a1;
+        }
+
+        /* Phần thông báo chúc mừng */
+        .success-msg {
+            color: #2e7d32; /* Màu xanh lá */
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 15px;
+            display: none; /* Mặc định ẩn */
+        }
+        
+        .error-msg {
+            color: #c62828;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        /* Thẻ kết quả (Cái bảng xanh) */
+        .result-card {
+            background-color: #e0f2f1; /* Màu nền xanh nhạt giống ảnh */
+            border: 1px solid #b2dfdb;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: none; /* Mặc định ẩn */
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            width: 40%; /* Chiếm 40% chiều rộng */
+            color: #333;
+        }
+
+        .info-value {
+            width: 60%;
+            color: #222;
+        }
+
+        /* Riêng phần loại học bổng */
+        .scholarship-type {
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Responsive cho điện thoại nhỏ */
+        @media (max-width: 400px) {
+            .info-row {
+                flex-direction: column;
+            }
+            .info-label {
+                width: 100%;
+                margin-bottom: 2px;
+            }
+            .info-value {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>DANH SÁCH SINH VIÊN HỆ<br>ĐẠI HỌC CHÍNH QUY ĐẠT<br>HỌC BỔNG KKHT</h1>
+        <h3>HỌC KỲ II NĂM HỌC 2024-2025</h3>
+        <p class="decision-text">
+            (Kèm theo Quyết định số 8256/QĐ-ĐHCNGTVT ngày 21 tháng 10 năm 2025 của Hiệu trưởng Trường Đại học Công nghệ GTVT)
+        </p>
+
+        <div class="search-box">
+            <label for="msv">Nhập Mã Sinh Viên:</label>
+            <input type="text" id="msvInput" value="74DCTG21087">
+            <button class="btn-search" onclick="traCuu()">Tra Cứu</button>
+        </div>
+
+        <div id="successMsg" class="success-msg">
+            Chúc mừng bạn đã có tên trong danh sách đạt Học bổng! 🎉
+        </div>
+        <div id="errorMsg" class="error-msg">
+            Rất tiếc, không tìm thấy thông tin sinh viên này.
+        </div>
+
+        <div id="resultCard" class="result-card">
+            <div class="info-row">
+                <div class="info-label">Mã Sinh Viên:</div>
+                <div class="info-value" id="resMSV"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Họ và tên:</div>
+                <div class="info-value" id="resName"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Lớp:</div>
+                <div class="info-value" id="resClass"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Khoa:</div>
+                <div class="info-value" id="resFaculty"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Ngành:</div>
+                <div class="info-value" id="resMajor"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Điểm TBHK (hệ 4):</div>
+                <div class="info-value" id="resScore"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Loại Học bổng:</div>
+                <div class="info-value scholarship-type" id="resType"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu giả lập (Database)
+        const database = [
+            {
+                msv: "74DCTT22583",
+                name: "Nguyễn Văn Minh",
+                lop: "74DCTT24",
+                khoa: "Khoa CNTT",
+                nganh: "Ngành IT",
+                diem: "3.92",
+                loai: "Xuất sắc"
+            },
+            {
+                msv: "123456",
+                name: "Nguyễn Văn A",
+                lop: "74CNTT1",
+                khoa: "Khoa CNTT",
+                nganh: "Công nghệ thông tin",
+                diem: "3.2",
+                loai: "Khá"
+            }
+        ];
+
+        // Hàm chạy khi trang web tải xong để hiển thị sẵn như trong ảnh
+        window.onload = function() {
+            traCuu();
+        };
+
+        function traCuu() {
+            const inputVal = document.getElementById("msvInput").value.trim();
+            const successMsg = document.getElementById("successMsg");
+            const errorMsg = document.getElementById("errorMsg");
+            const resultCard = document.getElementById("resultCard");
+
+            // Tìm sinh viên trong database
+            const student = database.find(s => s.msv === inputVal);
+
+            if (student) {
+                // Nếu tìm thấy
+                errorMsg.style.display = "none";
+                successMsg.style.display = "block";
+                resultCard.style.display = "block";
+
+                // Điền dữ liệu vào bảng
+                document.getElementById("resMSV").innerText = student.msv;
+                document.getElementById("resName").innerText = student.name;
+                document.getElementById("resClass").innerText = student.lop;
+                document.getElementById("resFaculty").innerText = student.khoa;
+                document.getElementById("resMajor").innerText = student.nganh;
+                document.getElementById("resScore").innerText = student.diem;
+                document.getElementById("resType").innerText = student.loai;
+            } else {
+                // Nếu không tìm thấy
+                successMsg.style.display = "none";
+                resultCard.style.display = "none";
+                errorMsg.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

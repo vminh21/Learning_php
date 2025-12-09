@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background-color: #f4f4f4;
+        }
+        
+        /* CSS 1: VÍ DỤ LOGIN/VALIDATION */
+        .login-form { 
+            max-width: 350px; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-form input { 
+            width: 100%; 
+            padding: 10px; 
+            margin: 8px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            box-sizing: border-box;
+        }
+        .login-form button { 
+            background-color: #007bff; 
+            color: white; 
+            padding: 10px 15px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 15px; 
+        }
+        #message { 
+            margin-top: 15px; 
+            padding: 10px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            text-align: center; 
+        }
+        .error { color: red; background-color: #ffe8e8; }
+        .success { color: green; background-color: #e8ffe8; }
+        h1,h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1> Form đăng nhập</h1>
+    <div class="login-form">
+        <h2>Đăng nhập</h2>
+        <label for="username">Tên đăng nhập:</label>
+        <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập">
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+        <button onclick="validateLogin()">Đăng nhập</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function validateLogin(){
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const messageDiv = document.getElementById('message');
+
+            messageDiv.textContent = ""; // Clear previous messages
+            messageDiv.className = ""; // Reset classes
+
+            if(username === "" || password === ""){
+                messageDiv.textContent = "Vui lòng điền đầy đủ thông tin tên đăng nhập và mật khẩu!!!";
+                messageDiv.classList.add('error');
+            }else{
+                messageDiv.textContent = "Đăng nhập thành công!";
+                messageDiv.classList.add('success');
+            }
+        }
+    </script>
+</body>
+</html>
